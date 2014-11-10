@@ -1,0 +1,113 @@
+<html>
+<head>
+	<script src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="/javascripts/roslib.js"></script>
+	<script src="/javascripts/controller.js"></script>
+	<link rel="stylesheet" href="/stylesheets/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<title>Lumibot</title>
+</head>
+
+<body>
+	<!-- ================================= Top Bar ==================================== -->
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand">Lumibot</a>
+				</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Playground</a></li>
+					<li><a href="#">Help</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Manage Profile</a></li>
+							<li><a href="#">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- ================================= Main Canvas ==================================== -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+			<img id="logo" height="200px" src="/images/lumibot.png">
+		</div>
+		<div class="col-md-6">
+			<p class="title"><center>Live Camera Feed</center></p>
+			<iframe width="100%" height="300" src=""></iframe> 
+			<!-- http://chester.cs.washington.edu:8080/stream?topic=/camera/rgb/image_color?quality=70 -->
+			<!-- http://chester.cs.washington.edu:8080/stream?topic=/camera/rgb/image_color -->
+		</div>
+		<div class="col-md-4">
+			<p class="title"><center>Map</center></p>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="row" id ="controlsRow">
+		<div class="col-md-2">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-default" id="forward">↑</button>
+			<br>
+			<button type="button" class="btn btn-default" id="left"><img src="/images/left.png" width="20px"></button>
+			<button type="button" class="btn btn-default" id="backward">↓</button>
+			<button type="button" class="btn btn-default" id="right"><img src="/images/right.png" width="20px"></button>
+			<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control Base
+		</div>
+		<div class="col-md-2">
+			<br>
+			<button type="button" class="btn btn-default" id="lampRotateLeft"><img src="/images/left.png" width="20px"></button>
+			<button type="button" class="btn btn-default" id="lampRotateRight"><img src="/images/right.png" width="20px"></button><br>
+			&nbsp;Control Lamp
+		</div>
+
+		<div class="col-md-3">
+			<button type="button" class="btn btn-default" id="sendHome">Send Home</button>
+			<button type="button" class="btn btn-default" id="lampState">Toggle Lamp</button><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General Controls
+		</div>
+
+		<div class="col-md-2">
+			<button type="button" class="btn btn-default" id="lampColor">Pick Color</button><br>
+			&nbsp;&nbsp;&nbsp;Lamp Color
+		</div>
+
+		<div class="col-md-2">
+			<p id="statusIndicator">Connecting..</p>
+			<button type="button" class="btn btn-default" id="instructions">Instructions</button>
+			&nbsp;&nbsp;&nbsp;Debugging
+		</div>
+
+	</div>
+</div>
+
+	<!-- <p>Run the following commands:</p>
+	<ol>
+		ssh turtlebot@softshell
+		<li><tt>roscore</tt></li>
+		<li><tt>roslaunch turtlebot_bringup minimal.launch</tt></li>
+		<li><tt>roslaunch rosbridge_server rosbridge_websocket.launch</tt></li>
+		<li><tt>roslaunch turtlebot_bringup 3dsensor.launch</tt></li>
+		<li><tt>rosrun mjpeg_server mjpeg_server</tt></li>
+	</ol> -->
+	
+</body>
+</html>

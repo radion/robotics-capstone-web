@@ -1,0 +1,48 @@
+.title {
+	margin-bottom: 5px;
+}
+
+#logo {
+	margin-top: 80px;
+	margin-left: 20px;
+}
+
+#forward {
+	margin-bottom: 5px;
+	height: 35px;
+}
+
+#left,#right {
+	margin-bottom: 5px;
+}
+
+#backward {
+	margin-bottom: 5px;
+}
+
+#lampRotateLeft, #lampRotateRight {
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+#lampColor {
+	margin-top: 40px;
+	margin-bottom: 5px;	
+}
+
+#instructions {
+	margin-bottom: 5px;
+}
+
+#statusIndicator {
+	margin-top: 10px;
+}
+
+#sendHome, #lampState {
+	margin-top: 40px;
+	margin-bottom: 5px;	
+}
+
+#controlsRow {
+	margin-top: 10px;
+}
