@@ -96,39 +96,6 @@ window.onload = function() {
     $.get( "/lampRotateRight" );
   });
 
- var interval0;
-$('#sendHome').on({
-  mousedown : function () {
-    var el = $(this);
-    el.val(parseInt(el.val(), 10) + 1);
-    interval0 = window.setInterval(function(){
-       goHome();
-      el.val(parseInt(el.val(), 10) + 1);
-    }, 200);
-  },
-  mouseup : function () {
-    window.clearInterval(interval0);
-  }
-});
-
-function goHome() {
-    var poseListener = new ROSLIB.Topic({
-    ros : ros,
-    name : '/robot_pose_ekf/odom_combined',
-    messageType : '/geometry_msgs/PoseWithCovarianceStamped',
-    throttle_rate : 0
-  });
-  poseListener.subscribe(function(pose) {
-    console.log(pose);
-    var poseHome = new ROSLIB.Topic({
-        ros : ros,
-        name : '/beginner_tutorials/go_home_node',
-        messageType : '/geometry_msgs/PoseWithCovarianceStamped'
-    });
-    poseHome.publish(pose);
-    poseListener.unsubscribe();
-  });
-}
 
   $('#instructions').click(function() {
     var ins = "ssh turtlebot@softshell\n";
@@ -224,4 +191,40 @@ function goHome() {
       window.clearInterval(interval4);
     }
   });
+
+	function goHome() {
+	    var poseListener = new ROSLIB.Topic({
+	    ros : ros,
+	    name : '/robot_pose_ekf/odom_combined',
+	    messageType : '/geometry_msgs/PoseWithCovarianceStamped',
+	    throttle_rate : 0
+	  });
+	  poseListener.subscribe(function(pose) {
+	    console.log(pose);
+	    var poseHome = new ROSLIB.Topic({
+		ros : ros,
+		name : '/beginner_tutorials/go_home_node',
+		messageType : '/geometry_msgs/PoseWithCovarianceStamped'
+	    });
+	    poseHome.publish(pose);
+	    poseListener.unsubscribe();
+	  });
+	}
+
+	 var interval0;
+	$('#sendHome').on({
+	  mousedown : function () {
+	    var el = $(this);
+	    el.val(parseInt(el.val(), 10) + 1);
+	    interval0 = window.setInterval(function(){
+	       goHome();
+	      el.val(parseInt(el.val(), 10) + 1);
+	    }, 200);
+	  },
+	  mouseup : function () {
+	    window.clearInterval(interval0);
+	  }
+	});
+
+
 }

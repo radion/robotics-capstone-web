@@ -101,11 +101,14 @@ window.onload = function() {
     var ins = "ssh turtlebot@softshell\n";
     ins += "-roscore\n";
     ins += "-roslaunch turtlebot_bringup minimal.launch\n";
+    ins += "-roslaunch beginner_tutorials web.launch\n";
     ins += "-roslaunch rosbridge_server rosbridge_websocket.launch\n";
     ins += "-roslaunch turtlebot_bringup 3dsensor.launch\n";
+    ins += "-rosrun robot_pose_ekf robot_pose_ekf\n";
     ins += "-rosrun mjpeg_server mjpeg_server";
     alert(ins);
   });
+
 
   function simulateKeyPress(character) {
     
