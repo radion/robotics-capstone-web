@@ -25,6 +25,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+// ============================= For Arduino =============================
+
+var SerialPort = require("serialport").SerialPort;
+var sp = new SerialPort("/dev/tty.usbmodem1421", {}, false);
+sp.open();
+
+app.get('/lampRotateLeft', function(req, res) {
+    sp.write('0');
+    res.send('donelampRotateLeft');
+});
+
+
+app.get('/lampRotateRight', function(req, res) {
+    sp.write('1');
+    res.send('donelampRotateRight');
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

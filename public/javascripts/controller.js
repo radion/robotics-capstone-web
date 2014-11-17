@@ -40,6 +40,16 @@ window.onload = function() {
       $('#backward').attr('class', 'btn btn-primary');
       break;
 
+      case 90: // z
+      $("#lampRotateLeft").trigger("click");
+      $('#lampRotateLeft').attr('class', 'btn btn-primary');
+      break;
+
+      case 88: // x
+      $('#lampRotateRight').trigger("click");
+      $('#lampRotateRight').attr('class', 'btn btn-primary');
+      break;
+
       default: return; // exit this handler for other keys
       }
       e.preventDefault(); // prevent the default action (scroll / move caret)
@@ -63,12 +73,28 @@ window.onload = function() {
       $('#backward').attr('class', 'btn btn-default');
       break;
 
+      case 90: // z
+      $('#lampRotateLeft').attr('class', 'btn btn-default');
+      break;
+
+      case 88: // x
+      $('#lampRotateRight').attr('class', 'btn btn-default');
+      break;
+
       default: return; // exit this handler for other keys
       }
       e.preventDefault(); // prevent the default action (scroll / move caret)
   });
 
   //============================ Button Behaviour ==========================//
+
+  $('#lampRotateLeft').click(function() {
+    $.get( "/lampRotateLeft" );
+  });
+
+  $('#lampRotateRight').click(function() {
+    $.get( "/lampRotateRight" );
+  });
 
   $('#sendHome').click(function() {
     alert('Sending Home');
