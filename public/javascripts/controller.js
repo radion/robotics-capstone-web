@@ -96,6 +96,18 @@ window.onload = function() {
     $.get( "/lampRotateRight" );
   });
 
+  $('#lampColor1').click(function() {
+    $.get( "/lampColor1" );
+  });
+
+ $('#lampColor2').click(function() {
+    $.get( "/lampColor2" );
+  });
+
+ $('#lampColor3').click(function() {
+    $.get( "/lampColor3" );
+  });
+
 
   $('#instructions').click(function() {
     var ins = "ssh turtlebot@softshell\n";

@@ -42,6 +42,21 @@ app.get('/lampRotateRight', function(req, res) {
     res.send('donelampRotateRight');
 });
 
+app.get('/lampColor1', function(req, res) {
+    sp.write('2');
+    res.send('donelampColor1');
+});
+
+app.get('/lampColor2', function(req, res) {
+    sp.write('3');
+    res.send('donelampColor2');
+});
+
+app.get('/lampColor3', function(req, res) {
+    sp.write('4');
+    res.send('donelampColor3');
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
