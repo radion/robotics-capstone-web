@@ -105,7 +105,8 @@ window.onload = function() {
     ins += "-roslaunch rosbridge_server rosbridge_websocket.launch\n";
     ins += "-roslaunch turtlebot_bringup 3dsensor.launch\n";
     ins += "-rosrun robot_pose_ekf robot_pose_ekf\n";
-    ins += "-rosrun mjpeg_server mjpeg_server";
+    ins += "-rosrun mjpeg_server mjpeg_server\n";
+    ins += "-roslaunch pocketsphinx lumi.launch";
     alert(ins);
   });
 
