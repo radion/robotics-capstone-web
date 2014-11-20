@@ -231,12 +231,23 @@ window.onload = function() {
 		var voiceListener = new ROSLIB.Topic({
 			ros : ros,
 			name : '/recognizer/output',
-			messageType : '/geometry_msgs/PoseWithCovarianceStamped',
+			messageType : '/std_msgs/String',
 			throttle_rate : 0
 		});
 	    voiceListener.subscribe(function(voiceCmd) {
 		    console.log(voiceCmd);
 		    // logic goes here
+		    if (voiceCmd.contains("stop it")) {
+		    	moveRobot(0, 0);
+		    } else if (voiceCmd.contains("lights on")) {
+		    	$('#lampColor2').trigger("click");
+		    } else if (voiceCmd.contains("lights off")) {
+		    	$('#lampColor3').trigger("click");
+		    } else if (voiceCmd.contains("follow me")) {
+		    	
+		    } else if (voiceCmd.contains("go home")) {
+		    	goHome();
+		    }
 		    voiceListener.unsubscribe();
 	  	});
 	}
@@ -256,5 +267,19 @@ window.onload = function() {
 	  }
 	});
 
+	var interval10;
+	$('#voiceOn').on({
+	  mousedown : function () {
+	    var el = $(this);
+	    el.val(parseInt(el.val(), 10) + 1);
+	    interval10 = window.setInterval(function(){
+	       respondToVoiceCommand();
+	      el.val(parseInt(el.val(), 10) + 1);
+	    }, 200);
+	  },
+	  mouseup : function () {
+	    window.clearInterval(interval10);
+	  }
+	});
 
 }
