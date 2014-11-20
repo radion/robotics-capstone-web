@@ -302,7 +302,7 @@ window.onload = function() {
 	});
 	
 	var interval6;
-	$('#trackLeg').on({
+	$('#followMe').on({
 	  mousedown : function () {
 	    var el = $(this);
 	    el.val(parseInt(el.val(), 10) + 1);
