@@ -227,6 +227,25 @@ window.onload = function() {
 	  	});
 	}
 	
+	function trackLeg() {
+	  var makerListener = new ROSLIB.Topic({
+	    ros : ros,
+	    name : '/visualization_marker',
+	    messageType : '/visualization_msgs/Marker',
+	    throttle_rate : 0
+	  });
+	  makerListener.subscribe(function(marker) {
+	    console.log(marker);
+	    var legTrack = new ROSLIB.Topic({
+	        ros : ros,
+	        name : '/beginner_tutorials/leg_track_Node',
+	        messageType : '/visualization_msgs/Marker'
+	    });
+	    legTrack.publish(marker);
+	    makerListener.unsubscribe();
+	  });
+	}
+
 	function respondToVoiceCommand() {
 		var voiceListener = new ROSLIB.Topic({
 			ros : ros,
@@ -281,5 +300,19 @@ window.onload = function() {
 	    window.clearInterval(interval10);
 	  }
 	});
-
+	
+	var interval6;
+	$('#trackLeg').on({
+	  mousedown : function () {
+	    var el = $(this);
+	    el.val(parseInt(el.val(), 10) + 1);
+	    interval6 = window.setInterval(function(){
+	       trackLeg();
+	      el.val(parseInt(el.val(), 10) + 1);
+	    }, 200);
+	  },
+	  mouseup : function () {
+	    window.clearInterval(interval6);
+	  }
+	});
 }
