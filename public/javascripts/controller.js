@@ -209,22 +209,36 @@ window.onload = function() {
   });
 
 	function goHome() {
-	    var poseListener = new ROSLIB.Topic({
-	    ros : ros,
-	    name : '/robot_pose_ekf/odom_combined',
-	    messageType : '/geometry_msgs/PoseWithCovarianceStamped',
-	    throttle_rate : 0
-	  });
-	  poseListener.subscribe(function(pose) {
-	    console.log(pose);
-	    var poseHome = new ROSLIB.Topic({
-		ros : ros,
-		name : '/beginner_tutorials/go_home_node',
-		messageType : '/geometry_msgs/PoseWithCovarianceStamped'
-	    });
-	    poseHome.publish(pose);
-	    poseListener.unsubscribe();
-	  });
+		var poseListener = new ROSLIB.Topic({
+			ros : ros,
+			name : '/robot_pose_ekf/odom_combined',
+			messageType : '/geometry_msgs/PoseWithCovarianceStamped',
+			throttle_rate : 0
+		});
+	    poseListener.subscribe(function(pose) {
+		    console.log(pose);
+		    var poseHome = new ROSLIB.Topic({
+				ros : ros,
+				name : '/beginner_tutorials/go_home_node',
+				messageType : '/geometry_msgs/PoseWithCovarianceStamped'
+		    });
+		    poseHome.publish(pose);
+		    poseListener.unsubscribe();
+	  	});
+	}
+	
+	function respondToVoiceCommand() {
+		var voiceListener = new ROSLIB.Topic({
+			ros : ros,
+			name : '/recognizer/output',
+			messageType : '/geometry_msgs/PoseWithCovarianceStamped',
+			throttle_rate : 0
+		});
+	    voiceListener.subscribe(function(voiceCmd) {
+		    console.log(voiceCmd);
+		    // logic goes here
+		    voiceListener.unsubscribe();
+	  	});
 	}
 
 	 var interval0;
