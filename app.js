@@ -27,9 +27,9 @@ app.use('/users', users);
 
 // ============================= For Arduino =============================
 
-var SerialPort = require("serialport").SerialPort;
-var sp = new SerialPort("/dev/ttyACM0", {}, false);
-sp.open();
+// var SerialPort = require("serialport").SerialPort;
+// var sp = new SerialPort("/dev/ttyACM0", {}, false);
+// sp.open();
 
 app.get('/lampRotateLeft', function(req, res) {
     sp.write('0');

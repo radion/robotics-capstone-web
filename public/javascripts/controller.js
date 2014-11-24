@@ -1,3 +1,7 @@
+var followMeGlobal = false;
+var sendHomeGlobal = false;
+var voiceOnGlobal = false;
+
 window.onload = function() {
   //=============================== ROS Connection ==========================//
   var ros = new ROSLIB.Ros();
@@ -208,44 +212,6 @@ window.onload = function() {
     }
   });
 
-	function goHome() {
-		var poseListener = new ROSLIB.Topic({
-			ros : ros,
-			name : '/robot_pose_ekf/odom_combined',
-			messageType : '/geometry_msgs/PoseWithCovarianceStamped',
-			throttle_rate : 0
-		});
-	    poseListener.subscribe(function(pose) {
-		    console.log(pose);
-		    var poseHome = new ROSLIB.Topic({
-				ros : ros,
-				name : '/beginner_tutorials/go_home_node',
-				messageType : '/geometry_msgs/PoseWithCovarianceStamped'
-		    });
-		    poseHome.publish(pose);
-		    poseListener.unsubscribe();
-	  	});
-	}
-	
-	function trackLeg() {
-	  var makerListener = new ROSLIB.Topic({
-	    ros : ros,
-	    name : '/visualization_marker',
-	    messageType : '/visualization_msgs/Marker',
-	    throttle_rate : 0
-	  });
-	  makerListener.subscribe(function(marker) {
-	    console.log(marker);
-	    var legTrack = new ROSLIB.Topic({
-	        ros : ros,
-	        name : '/beginner_tutorials/leg_track_Node',
-	        messageType : '/visualization_msgs/Marker'
-	    });
-	    legTrack.publish(marker);
-	    makerListener.unsubscribe();
-	  });
-	}
-
 	function respondToVoiceCommand() {
 		var voiceListener = new ROSLIB.Topic({
 			ros : ros,
@@ -271,48 +237,83 @@ window.onload = function() {
 	  	});
 	}
 
-	 var interval0;
-	$('#sendHome').on({
-	  mousedown : function () {
-	    var el = $(this);
-	    el.val(parseInt(el.val(), 10) + 1);
-	    interval0 = window.setInterval(function(){
-	       goHome();
-	      el.val(parseInt(el.val(), 10) + 1);
-	    }, 200);
-	  },
-	  mouseup : function () {
-	    window.clearInterval(interval0);
-	  }
+	// var interval10;
+	// $('#voiceOn').on({
+	//   mousedown : function () {
+	//     var el = $(this);
+	//     el.val(parseInt(el.val(), 10) + 1);
+	//     interval10 = window.setInterval(function(){
+	//        respondToVoiceCommand();
+	//       el.val(parseInt(el.val(), 10) + 1);
+	//     }, 200);
+	//   },
+	//   mouseup : function () {
+	//     window.clearInterval(interval10);
+	//   }
+	// });
+	
+  $('#voiceOn').click( function() {
+    if(voiceOnGlobal == true) {
+      $('#sendHome').prop('disabled', false);
+      $('#followMe').prop('disabled', false);
+      $('#voiceOn').attr('class', 'btn btn-default');
+      voiceOnGlobal = false;
+    } else {
+      $('#sendHome').prop('disabled', true);
+      $('#followMe').prop('disabled', true);
+      $('#voiceOn').attr('class', 'btn btn-primary');
+      voiceOnGlobal = true;
+    }
+  });
+
+	$('#followMe').click( function() {
+     var startTrack = new ROSLIB.Topic({
+      ros : ros,
+      name : '/beginner_tutorials/string_node',
+      messageType : 'std_msgs/String',
+      throttle_rate : 0
+    });
+     if(followMeGlobal == true) {
+       var twist = new ROSLIB.Message({
+        data : "h0"
+      });
+       startTrack.publish(twist);
+       followMeGlobal = false;
+    } else {
+      var twist = new ROSLIB.Message({
+        data : "h1"
+      });
+       startTrack.publish(twist);
+       followMeGlobal = true;
+    }
+   
+    console.log("chatteredFollowMe");
+    // rostopic pub /chatter std_msgs/String "h0"
 	});
 
-	var interval10;
-	$('#voiceOn').on({
-	  mousedown : function () {
-	    var el = $(this);
-	    el.val(parseInt(el.val(), 10) + 1);
-	    interval10 = window.setInterval(function(){
-	       respondToVoiceCommand();
-	      el.val(parseInt(el.val(), 10) + 1);
-	    }, 200);
-	  },
-	  mouseup : function () {
-	    window.clearInterval(interval10);
-	  }
-	});
-	
-	var interval6;
-	$('#followMe').on({
-	  mousedown : function () {
-	    var el = $(this);
-	    el.val(parseInt(el.val(), 10) + 1);
-	    interval6 = window.setInterval(function(){
-	       trackLeg();
-	      el.val(parseInt(el.val(), 10) + 1);
-	    }, 200);
-	  },
-	  mouseup : function () {
-	    window.clearInterval(interval6);
-	  }
-	});
+    $('#sendHome').click( function() {
+     var startTrack = new ROSLIB.Topic({
+      ros : ros,
+      name : '/beginner_tutorials/string_node',
+      messageType : 'std_msgs/String',
+      throttle_rate : 0
+    });
+     if(sendHomeGlobal == true) {
+       var twist = new ROSLIB.Message({
+        data : "sh0"
+      });
+       startTrack.publish(twist);
+       sendHomeGlobal = false;
+    } else {
+      var twist = new ROSLIB.Message({
+        data : "sh1"
+      });
+       startTrack.publish(twist);
+       sendHomeGlobal = true;
+    }
+   
+    console.log("chatteredSendHome");
+    // rostopic pub /chatter std_msgs/String "h0"
+  });
+
 }

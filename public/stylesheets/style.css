@@ -38,9 +38,14 @@
 	margin-top: 10px;
 }
 
-#sendHome, #lampState {
-	margin-top: 40px;
+#sendHome, #lampState, #voiceOn, #followMe {
 	margin-bottom: 5px;	
+	width: 120px;
+}
+
+#lampColor1, #lampColor2, #lampColor3 {
+	margin-bottom: 5px;	
+	width: 120px;
 }
 
 #controlsRow {
