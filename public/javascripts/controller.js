@@ -1,6 +1,7 @@
 var followMeGlobal = false;
 var sendHomeGlobal = false;
 var voiceOnGlobal = false;
+var currentLightColor = 0;
 
 window.onload = function() {
   //=============================== ROS Connection ==========================//
@@ -19,6 +20,13 @@ window.onload = function() {
   });
 
   ros.connect('ws://softshell.cs.washington.edu:9090');
+
+  var voiceListener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/recognizer/output',
+    messageType : '/std_msgs/String',
+    throttle_rate : 0
+  });
 
   //============================ Key Behaviour ==========================//
 
@@ -92,26 +100,6 @@ window.onload = function() {
 
   //============================ Button Behaviour ==========================//
 
-  $('#lampRotateLeft').click(function() {
-    $.get( "/lampRotateLeft" );
-  });
-
-  $('#lampRotateRight').click(function() {
-    $.get( "/lampRotateRight" );
-  });
-
-  $('#lampColor1').click(function() {
-    $.get( "/lampColor1" );
-  });
-
- $('#lampColor2').click(function() {
-    $.get( "/lampColor2" );
-  });
-
- $('#lampColor3').click(function() {
-    $.get( "/lampColor3" );
-  });
-
 
   $('#instructions').click(function() {
     var ins = "ssh turtlebot@softshell\n";
@@ -126,10 +114,6 @@ window.onload = function() {
     alert(ins);
   });
 
-
-  function simulateKeyPress(character) {
-    
-  }
 
   function moveRobot(xDir, rotate) {
     var cmdVel = new ROSLIB.Topic({
@@ -212,55 +196,96 @@ window.onload = function() {
     }
   });
 
+  $('#lampRotateLeft').click(function() {
+    $.get( "/lampRotateLeft" );
+  });
+
+  $('#lampRotateRight').click(function() {
+    $.get( "/lampRotateRight" );
+  });
+
+  $('#lampColor1').click(function() {
+    if(currentLightColor != 1) {
+      currentLightColor = 1;
+      $('#lampColor1').attr('class', 'btn btn-primary');
+      $('#lampColor2').attr('class', 'btn btn-default');
+      $('#lampColor3').attr('class', 'btn btn-default');
+    }
+    
+    $.get( "/lampColor1" );
+  });
+
+ $('#lampColor2').click(function() {
+   if(currentLightColor != 2) {
+      currentLightColor = 2;
+      $('#lampColor2').attr('class', 'btn btn-primary');
+      $('#lampColor1').attr('class', 'btn btn-default');
+      $('#lampColor3').attr('class', 'btn btn-default');
+    }
+    $.get( "/lampColor2" );
+  });
+
+ $('#lampColor3').click(function() {
+  if(currentLightColor != 3) {
+      currentLightColor = 3;
+      $('#lampColor3').attr('class', 'btn btn-primary');
+      $('#lampColor1').attr('class', 'btn btn-default');
+      $('#lampColor2').attr('class', 'btn btn-default');
+    }
+    $.get( "/lampColor3" );
+  });
+
+
 	function respondToVoiceCommand() {
-		var voiceListener = new ROSLIB.Topic({
-			ros : ros,
-			name : '/recognizer/output',
-			messageType : '/std_msgs/String',
-			throttle_rate : 0
-		});
 	    voiceListener.subscribe(function(voiceCmd) {
-		    console.log(voiceCmd);
+		    var stringVoiceCommand = voiceCmd.data;
 		    // logic goes here
-		    if (voiceCmd.contains("stop it")) {
-		    	moveRobot(0, 0);
-		    } else if (voiceCmd.contains("lights on")) {
-		    	$('#lampColor2').trigger("click");
-		    } else if (voiceCmd.contains("lights off")) {
-		    	$('#lampColor3').trigger("click");
-		    } else if (voiceCmd.contains("follow me")) {
-		    	
-		    } else if (voiceCmd.contains("go home")) {
-		    	goHome();
+		    if (stringVoiceCommand.indexOf("stop it") != -1) {
+		    	if(sendHomeGlobal == true) {
+            $('#sendHome').trigger('click');
+          }
+          if(followMeGlobal == true) {
+            $('#followMe').trigger('click');
+          }
+		    } else if (stringVoiceCommand.indexOf("lights on") != -1) {
+		    	// $('#lampColor2').trigger("click");
+		    } else if (stringVoiceCommand.indexOf("lights off") != -1) {
+		    	// $('#lampColor3').trigger("click");
+		    } else if (stringVoiceCommand.indexOf("follow me") != -1) {
+		    	if(sendHomeGlobal == true) {
+            $('#sendHome').trigger('click');
+          }
+          if(followMeGlobal == false) {
+            $('#followMe').trigger('click');
+          }
+		    } else if (stringVoiceCommand.indexOf("go home") != -1) {
+          if(followMeGlobal == true) {
+            $('#followMe').trigger('click');
+          }
+		    	if(sendHomeGlobal == false) {
+            $('#sendHome').trigger('click');
+          }
 		    }
-		    voiceListener.unsubscribe();
+		    
 	  	});
+      // rostopic echo /recognizer/output
 	}
 
-	// var interval10;
-	// $('#voiceOn').on({
-	//   mousedown : function () {
-	//     var el = $(this);
-	//     el.val(parseInt(el.val(), 10) + 1);
-	//     interval10 = window.setInterval(function(){
-	//        respondToVoiceCommand();
-	//       el.val(parseInt(el.val(), 10) + 1);
-	//     }, 200);
-	//   },
-	//   mouseup : function () {
-	//     window.clearInterval(interval10);
-	//   }
-	// });
+  function disableVoiceCommands() {
+    voiceListener.unsubscribe();
+  }
 	
   $('#voiceOn').click( function() {
     if(voiceOnGlobal == true) {
-      $('#sendHome').prop('disabled', false);
-      $('#followMe').prop('disabled', false);
+      disableVoiceCommands();
+      // $('#sendHome').prop('disabled', false);
+      // $('#followMe').prop('disabled', false);
       $('#voiceOn').attr('class', 'btn btn-default');
       voiceOnGlobal = false;
     } else {
-      $('#sendHome').prop('disabled', true);
-      $('#followMe').prop('disabled', true);
+      respondToVoiceCommand();
+      // $('#sendHome').prop('disabled', true);
+      // $('#followMe').prop('disabled', true);
       $('#voiceOn').attr('class', 'btn btn-primary');
       voiceOnGlobal = true;
     }
@@ -274,17 +299,23 @@ window.onload = function() {
       throttle_rate : 0
     });
      if(followMeGlobal == true) {
-       var twist = new ROSLIB.Message({
-        data : "h0"
-      });
+        var twist = new ROSLIB.Message({
+          data : "h0"
+        });
        startTrack.publish(twist);
        followMeGlobal = false;
+       $('#sendHome').prop('disabled', false);
+        // $('#voiceOn').prop('disabled', false);
+        $('#followMe').attr('class', 'btn btn-default');
     } else {
       var twist = new ROSLIB.Message({
         data : "h1"
       });
        startTrack.publish(twist);
        followMeGlobal = true;
+       $('#sendHome').prop('disabled', true);
+        // $('#voiceOn').prop('disabled', true);
+        $('#followMe').attr('class', 'btn btn-primary');
     }
    
     console.log("chatteredFollowMe");
@@ -304,12 +335,18 @@ window.onload = function() {
       });
        startTrack.publish(twist);
        sendHomeGlobal = false;
+       $('#followMe').prop('disabled', false);
+        // $('#voiceOn').prop('disabled', false);
+        $('#sendHome').attr('class', 'btn btn-default');
     } else {
       var twist = new ROSLIB.Message({
         data : "sh1"
       });
        startTrack.publish(twist);
        sendHomeGlobal = true;
+        $('#followMe').prop('disabled', true);
+        // $('#voiceOn').prop('disabled', true);
+        $('#sendHome').attr('class', 'btn btn-primary');
     }
    
     console.log("chatteredSendHome");
