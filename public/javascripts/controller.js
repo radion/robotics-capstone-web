@@ -211,7 +211,6 @@ window.onload = function() {
       $('#lampColor2').attr('class', 'btn btn-default');
       $('#lampColor3').attr('class', 'btn btn-default');
     }
-    
     $.get( "/lampColor1" );
   });
 
@@ -248,9 +247,9 @@ window.onload = function() {
             $('#followMe').trigger('click');
           }
 		    } else if (stringVoiceCommand.indexOf("lights on") != -1) {
-		    	// $('#lampColor2').trigger("click");
+		    	$('#lampColor1').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lights off") != -1) {
-		    	// $('#lampColor3').trigger("click");
+		    	$('#lampColor2').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("follow me") != -1) {
 		    	if(sendHomeGlobal == true) {
             $('#sendHome').trigger('click');
