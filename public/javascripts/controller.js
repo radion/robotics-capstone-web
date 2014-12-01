@@ -239,33 +239,32 @@ window.onload = function() {
 	    voiceListener.subscribe(function(voiceCmd) {
 		    var stringVoiceCommand = voiceCmd.data;
 		    // logic goes here
-		    if (stringVoiceCommand.indexOf("stop it") != -1) {
+		    if (stringVoiceCommand.indexOf("lumi stop it") != -1) {
 		    	if(sendHomeGlobal == true) {
-            $('#sendHome').trigger('click');
-          }
-          if(followMeGlobal == true) {
-            $('#followMe').trigger('click');
-          }
-		    } else if (stringVoiceCommand.indexOf("lights on") != -1) {
+            			$('#sendHome').trigger('click');
+		    	}
+          		if(followMeGlobal == true) {
+        			$('#followMe').trigger('click');
+          		}
+		    } else if (stringVoiceCommand.indexOf("lumi lights on") != -1) {
 		    	$('#lampColor1').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lights off") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi lights off") != -1) {
 		    	$('#lampColor2').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("follow me") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi follow me") != -1) {
 		    	if(sendHomeGlobal == true) {
-            $('#sendHome').trigger('click');
-          }
-          if(followMeGlobal == false) {
-            $('#followMe').trigger('click');
-          }
-		    } else if (stringVoiceCommand.indexOf("go home") != -1) {
-          if(followMeGlobal == true) {
-            $('#followMe').trigger('click');
-          }
+		    		$('#sendHome').trigger('click');
+		    	}
+          		if(followMeGlobal == false) {
+          			$('#followMe').trigger('click');
+          		}
+		    } else if (stringVoiceCommand.indexOf("lumi go home") != -1) {
+		    	if(followMeGlobal == true) {
+		    		$('#followMe').trigger('click');
+		    	}
 		    	if(sendHomeGlobal == false) {
-            $('#sendHome').trigger('click');
-          }
+		    		$('#sendHome').trigger('click');
+		    	}
 		    }
-		    
 	  	});
       // rostopic echo /recognizer/output
 	}
