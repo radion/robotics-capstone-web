@@ -238,8 +238,8 @@ window.onload = function() {
   });
 
  $('#lampColor4').click(function() {
-  if(currentLightColor != 4) {
-      currentLightColor = 4;
+  if(currentLightColor != 3) {
+      currentLightColor = 3;
       $('#lampColor3').attr('class', 'btn btn-default');
       $('#lampColor1').attr('class', 'btn btn-default');
       $('#lampColor2').attr('class', 'btn btn-default');

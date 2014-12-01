@@ -24,9 +24,16 @@ void loop() {
     char ch = Serial.read();
     Serial.println(ch);
     if(ch == '0') {
-      servoMain.write(45);  // Turn Servo Left to 45 degrees
+      for(int i = 179; i >= 70; i--) {
+        servoMain.write(i);
+        delay(10);
+      }
+      // Turn Servo Left to 45 degrees
     } else if(ch == '1') {
-      servoMain.write(180); // Turn Servo Right to 180 degrees
+      for(int i = 70; i <= 180; i++) {
+        servoMain.write(i);
+        delay(10);
+      }
     } else if(ch == '2') {
       analogWrite(REDPIN, 255);
       analogWrite(GREENPIN, 0);
@@ -38,7 +45,28 @@ void loop() {
     } else if(ch == '4') {
       analogWrite(REDPIN, 0);
       analogWrite(GREENPIN, 0);
-      analogWrite(BLUEPIN, 255);
+      analogWrite(BLUEPIN, 0);
+    } else if(ch == '5') {
+      for(int j = 3; j >= 0; j--) {
+        analogWrite(REDPIN, 255);
+        analogWrite(GREENPIN, 0);
+        analogWrite(BLUEPIN, 0);
+        delay(400);
+        for(int i = 179; i >= 70; i--) {
+          servoMain.write(i);
+          delay(10 - (6 - j*2));
+        }
+        analogWrite(REDPIN, 0);
+        analogWrite(GREENPIN, 0);
+        analogWrite(BLUEPIN, 0);
+        for(int i = 70; i <= 180; i++) {
+          servoMain.write(i);
+          delay(10 - (6 - j*2));
+        }
+        analogWrite(REDPIN, 0);
+        analogWrite(GREENPIN, 255);
+        analogWrite(BLUEPIN, 0);
+      }
     }
   }
    
