@@ -251,34 +251,35 @@ window.onload = function() {
 	function respondToVoiceCommand() {
 	    voiceListener.subscribe(function(voiceCmd) {
 		    var stringVoiceCommand = voiceCmd.data;
+		console.log(stringVoiceCommand);
 		    // logic goes here
-		    if (stringVoiceCommand.indexOf("lumi stop it") != -1) {
+		    if (stringVoiceCommand.indexOf("stop it") != -1) {
 		    	if(sendHomeGlobal == true) {
             			$('#sendHome').trigger('click');
 		    	}
           		if(followMeGlobal == true) {
         			$('#followMe').trigger('click');
           		}
-		    } else if (stringVoiceCommand.indexOf("lumi lights red") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lights red") != -1) {
 		    	$('#lampColor1').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lumi lights blue") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lights blue") != -1) {
 		    	$('#lampColor2').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lumi lights husky") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lights husky") != -1) {
 		    	$('#lampColor3').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lumi fiesta") != -1) {
 		    	$('#lampColor4').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lumi lamp up") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lamp up") != -1) {
 		    	$('#lampRotateLeft').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lumi lamp down") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lamp down") != -1) {
 		    	$('#lampRotateRight').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lumi follow me") != -1) {
+		    } else if (stringVoiceCommand.indexOf("follow me") != -1) {
 		    	if(sendHomeGlobal == true) {
 		    		$('#sendHome').trigger('click');
 		    	}
           		if(followMeGlobal == false) {
           			$('#followMe').trigger('click');
           		}
-		    } else if (stringVoiceCommand.indexOf("lumi go home") != -1) {
+		    } else if (stringVoiceCommand.indexOf("go home") != -1) {
 		    	if(followMeGlobal == true) {
 		    		$('#followMe').trigger('click');
 		    	}

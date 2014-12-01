@@ -238,8 +238,8 @@ window.onload = function() {
   });
 
  $('#lampColor4').click(function() {
-  if(currentLightColor != 3) {
-      currentLightColor = 3;
+  if(currentLightColor != 4) {
+      currentLightColor = 4;
       $('#lampColor3').attr('class', 'btn btn-default');
       $('#lampColor1').attr('class', 'btn btn-default');
       $('#lampColor2').attr('class', 'btn btn-default');
@@ -251,6 +251,7 @@ window.onload = function() {
 	function respondToVoiceCommand() {
 	    voiceListener.subscribe(function(voiceCmd) {
 		    var stringVoiceCommand = voiceCmd.data;
+		console.log(stringVoiceCommand);
 		    // logic goes here
 		    if (stringVoiceCommand.indexOf("lumi stop it") != -1) {
 		    	if(sendHomeGlobal == true) {
