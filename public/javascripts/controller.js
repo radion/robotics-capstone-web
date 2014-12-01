@@ -246,10 +246,19 @@ window.onload = function() {
           		if(followMeGlobal == true) {
         			$('#followMe').trigger('click');
           		}
-		    } else if (stringVoiceCommand.indexOf("lumi lights on") != -1) {
+          		
+		    } else if (stringVoiceCommand.indexOf("lumi fiesta") != -1) {
+		    	
+		    } else if (stringVoiceCommand.indexOf("lumi lights red") != -1) {
 		    	$('#lampColor1').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lumi lights off") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi lights blue") != -1) {
 		    	$('#lampColor2').trigger("click");
+		    } else if (stringVoiceCommand.indexOf("lumi lights husky") != -1) {
+		    	$('#lampColor3').trigger("click");
+		    } else if (stringVoiceCommand.indexOf("lumi lamp up") != -1) {
+		    	$('#lampRotateLeft').trigger("click");
+		    } else if (stringVoiceCommand.indexOf("lumi lamp down") != -1) {
+		    	$('#lampRotateRight').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lumi follow me") != -1) {
 		    	if(sendHomeGlobal == true) {
 		    		$('#sendHome').trigger('click');
