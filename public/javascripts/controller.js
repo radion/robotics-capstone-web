@@ -246,14 +246,14 @@ window.onload = function() {
           		if(followMeGlobal == true) {
         			$('#followMe').trigger('click');
           		}
-		    } else if (stringVoiceCommand.indexOf("lumi fiesta") != -1) {
-		    	
 		    } else if (stringVoiceCommand.indexOf("lumi lights red") != -1) {
 		    	$('#lampColor1').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lumi lights blue") != -1) {
 		    	$('#lampColor2').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lumi lights husky") != -1) {
 		    	$('#lampColor3').trigger("click");
+		    } else if (stringVoiceCommand.indexOf("lumi fiesta") != -1) {
+		    	$('#lampColor4').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lumi lamp up") != -1) {
 		    	$('#lampRotateLeft').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lumi lamp down") != -1) {
