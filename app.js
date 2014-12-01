@@ -57,6 +57,11 @@ app.get('/lampColor3', function(req, res) {
     res.send('donelampColor3');
 });
 
+app.get('/lampColor4', function(req, res) {
+    sp.write('5');
+    res.send('donelampColor4');
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
