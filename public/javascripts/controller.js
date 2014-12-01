@@ -246,7 +246,6 @@ window.onload = function() {
           		if(followMeGlobal == true) {
         			$('#followMe').trigger('click');
           		}
-          		
 		    } else if (stringVoiceCommand.indexOf("lumi fiesta") != -1) {
 		    	
 		    } else if (stringVoiceCommand.indexOf("lumi lights red") != -1) {
