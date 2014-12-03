@@ -206,10 +206,16 @@ window.onload = function() {
   });
 
   $('#lampRotateLeft').click(function() {
+    var audio = new Audio();
+    audio.src ='/up.mp3';
+    audio.play();
     $.get( "/lampRotateLeft" );
   });
 
   $('#lampRotateRight').click(function() {
+    var audio = new Audio();
+    audio.src ='/down.mp3';
+    audio.play();
     $.get( "/lampRotateRight" );
   });
 
