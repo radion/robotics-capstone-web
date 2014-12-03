@@ -4,6 +4,15 @@ var voiceOnGlobal = false;
 var currentLightColor = 0;
 
 window.onload = function() {
+// Prepare Music
+ var audioElement = document.createElement('audio');
+        audioElement.setAttribute('src', '/jingleBells.mp3');
+        // audioElement.setAttribute('autoplay', 'autoplay');
+        //audioElement.load()
+        $.get();
+        audioElement.addEventListener("load", function() {
+        audioElement.play();
+        }, true);
   //=============================== ROS Connection ==========================//
   var ros = new ROSLIB.Ros();
 
@@ -205,6 +214,7 @@ window.onload = function() {
   });
 
   $('#lampColor1').click(function() {
+audioElement.pause();
     if(currentLightColor != 1) {
       currentLightColor = 1;
       $('#lampColor1').attr('class', 'btn btn-primary');
@@ -216,6 +226,7 @@ window.onload = function() {
   });
 
  $('#lampColor2').click(function() {
+audioElement.pause();
    if(currentLightColor != 2) {
       currentLightColor = 2;
       $('#lampColor2').attr('class', 'btn btn-primary');
@@ -227,6 +238,7 @@ window.onload = function() {
   });
 
  $('#lampColor3').click(function() {
+audioElement.pause();
   if(currentLightColor != 3) {
       currentLightColor = 3;
       $('#lampColor3').attr('class', 'btn btn-primary');
@@ -239,6 +251,7 @@ window.onload = function() {
 
  $('#lampColor4').click(function() {
   if(currentLightColor != 4) {
+	audioElement.play();
       currentLightColor = 4;
       $('#lampColor3').attr('class', 'btn btn-default');
       $('#lampColor1').attr('class', 'btn btn-default');
@@ -253,33 +266,33 @@ window.onload = function() {
 		    var stringVoiceCommand = voiceCmd.data;
 		console.log(stringVoiceCommand);
 		    // logic goes here
-		    if (stringVoiceCommand.indexOf("stop it") != -1) {
+		    if (stringVoiceCommand.indexOf("lumi terminate") != -1) {
 		    	if(sendHomeGlobal == true) {
             			$('#sendHome').trigger('click');
 		    	}
           		if(followMeGlobal == true) {
         			$('#followMe').trigger('click');
           		}
-		    } else if (stringVoiceCommand.indexOf("lights red") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi red") != -1) {
 		    	$('#lampColor1').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lights blue") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi blue") != -1) {
 		    	$('#lampColor2').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lights husky") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi husky") != -1) {
 		    	$('#lampColor3').trigger("click");
 		    } else if (stringVoiceCommand.indexOf("lumi fiesta") != -1) {
 		    	$('#lampColor4').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lamp up") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi ascend") != -1) {
 		    	$('#lampRotateLeft').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("lamp down") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi down") != -1) {
 		    	$('#lampRotateRight').trigger("click");
-		    } else if (stringVoiceCommand.indexOf("follow me") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi follow") != -1) {
 		    	if(sendHomeGlobal == true) {
 		    		$('#sendHome').trigger('click');
 		    	}
           		if(followMeGlobal == false) {
           			$('#followMe').trigger('click');
           		}
-		    } else if (stringVoiceCommand.indexOf("go home") != -1) {
+		    } else if (stringVoiceCommand.indexOf("lumi home") != -1) {
 		    	if(followMeGlobal == true) {
 		    		$('#followMe').trigger('click');
 		    	}
@@ -323,6 +336,8 @@ window.onload = function() {
           data : "h0"
         });
        startTrack.publish(twist);
+	startTrack.publish(twist);
+	startTrack.publish(twist);
        followMeGlobal = false;
        $('#sendHome').prop('disabled', false);
         // $('#voiceOn').prop('disabled', false);
@@ -332,6 +347,8 @@ window.onload = function() {
         data : "h1"
       });
        startTrack.publish(twist);
+	startTrack.publish(twist);
+	startTrack.publish(twist);
        followMeGlobal = true;
        $('#sendHome').prop('disabled', true);
         // $('#voiceOn').prop('disabled', true);
@@ -354,6 +371,8 @@ window.onload = function() {
         data : "sh0"
       });
        startTrack.publish(twist);
+	startTrack.publish(twist);
+	startTrack.publish(twist);
        sendHomeGlobal = false;
        $('#followMe').prop('disabled', false);
         // $('#voiceOn').prop('disabled', false);
@@ -363,6 +382,8 @@ window.onload = function() {
         data : "sh1"
       });
        startTrack.publish(twist);
+	startTrack.publish(twist);
+	startTrack.publish(twist);
        sendHomeGlobal = true;
         $('#followMe').prop('disabled', true);
         // $('#voiceOn').prop('disabled', true);
