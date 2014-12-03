@@ -337,9 +337,11 @@ var audio = new Audio();
   });
 
 	$('#followMe').click( function() {
-var audio = new Audio();
-	audio.src ='/following.mp3';
-	audio.play();
+    if($('#followMe').attr('class') == "btn btn-default"){
+      var audio = new Audio();
+  	 audio.src ='/following.mp3';
+  	 audio.play();
+     }
      var startTrack = new ROSLIB.Topic({
       ros : ros,
       name : '/beginner_tutorials/string_node',
@@ -375,9 +377,11 @@ var audio = new Audio();
 	});
 
     $('#sendHome').click( function() {
-	var audio = new Audio();
-	audio.src ='/home.mp3';
-	audio.play();
+    if($('#sendHome').attr('class') == "btn btn-default"){
+      var audio = new Audio();
+    	audio.src ='/home.mp3';
+    	audio.play();
+    }
      var startTrack = new ROSLIB.Topic({
       ros : ros,
       name : '/beginner_tutorials/string_node',
