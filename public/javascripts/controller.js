@@ -341,6 +341,10 @@ var audio = new Audio();
       var audio = new Audio();
   	 audio.src ='/following.mp3';
   	 audio.play();
+     } else {
+        var audio = new Audio();
+       audio.src ='/terminate.mp3';
+       audio.play();
      }
      var startTrack = new ROSLIB.Topic({
       ros : ros,
@@ -381,7 +385,11 @@ var audio = new Audio();
       var audio = new Audio();
     	audio.src ='/home.mp3';
     	audio.play();
-    }
+    } else {
+        var audio = new Audio();
+       audio.src ='/terminate.mp3';
+       audio.play();
+     }
      var startTrack = new ROSLIB.Topic({
       ros : ros,
       name : '/beginner_tutorials/string_node',
