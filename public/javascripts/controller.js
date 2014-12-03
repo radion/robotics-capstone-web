@@ -215,7 +215,7 @@ window.onload = function() {
 
   $('#lampColor1').click(function() {
 var audio = new Audio();
-	audio.src ='http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Okay boss. I turned it red.';
+	audio.src ='/red.mp3';
 	audio.play();
 audioElement.pause();
     if(currentLightColor != 1) {
@@ -230,7 +230,7 @@ audioElement.pause();
 
  $('#lampColor2').click(function() {
 var audio = new Audio();
-	audio.src ='http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Okay boss. I turned it blue.';
+	audio.src ='/blue.mp3';
 	audio.play();
 audioElement.pause();
    if(currentLightColor != 2) {
@@ -245,7 +245,7 @@ audioElement.pause();
 
  $('#lampColor3').click(function() {
 var audio = new Audio();
-	audio.src ='http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Okay boss. I turned it husky.';
+	audio.src ='/husky.mp3';
 	audio.play();
 audioElement.pause();
   if(currentLightColor != 3) {
@@ -260,7 +260,7 @@ audioElement.pause();
 
  $('#lampColor4').click(function() {
 var audio = new Audio();
-	audio.src ='http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Okay boss. I am on Fiesta Fiesta.';
+	audio.src ='/fiesta.mp3';
 	audio.play();
   if(currentLightColor != 4) {
 	audioElement.play();
@@ -338,7 +338,7 @@ var audio = new Audio();
 
 	$('#followMe').click( function() {
 var audio = new Audio();
-	audio.src ='http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Yes boss. Following Your Majesty.';
+	audio.src ='/following.mp3';
 	audio.play();
      var startTrack = new ROSLIB.Topic({
       ros : ros,
@@ -376,7 +376,7 @@ var audio = new Audio();
 
     $('#sendHome').click( function() {
 	var audio = new Audio();
-	audio.src ='http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Yes boss. Going Home.';
+	audio.src ='/home.mp3';
 	audio.play();
      var startTrack = new ROSLIB.Topic({
       ros : ros,
