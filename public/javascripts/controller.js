@@ -277,10 +277,10 @@ audioElement.pause();
       $('#lampColor1').attr('class', 'btn btn-default');
       $('#lampColor2').attr('class', 'btn btn-default');
       $('#lampColor4').attr('class', 'btn btn-primary');
-      for(var i = 0; i < 5; i++) {
+      for(var i = 0; i < 200; i++) {
         $("#left").trigger("click");
       }
-      for(var i = 0; i < 5; i++) {
+      for(var i = 0; i < 200; i++) {
         $("#right").trigger("click");
       }
     }
