@@ -271,11 +271,11 @@ var audio = new Audio();
   if(currentLightColor != 4) {
 	audioElement.play();
       currentLightColor = 4;
-      for(int j = 0; j < 5; j++) {
-        for(int i = 0; i < 5; i++) {
+      for(var j = 0; j < 5; j++) {
+        for(var i = 0; i < 5; i++) {
           $("#lampRotateLeft").trigger("click");
         }
-        for(int i = 0; i < 5; i++) {
+        for(var i = 0; i < 5; i++) {
           $("#lampRotateRight").trigger("click");
         }
       }
