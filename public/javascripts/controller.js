@@ -271,20 +271,21 @@ var audio = new Audio();
   if(currentLightColor != 4) {
 	audioElement.play();
       currentLightColor = 4;
-      for(var j = 0; j < 5; j++) {
-        for(var i = 0; i < 5; i++) {
-          $("#lampRotateLeft").trigger("click");
-        }
-        for(var i = 0; i < 5; i++) {
-          $("#lampRotateRight").trigger("click");
-        }
-      }
+      
       $('#lampColor3').attr('class', 'btn btn-default');
       $('#lampColor1').attr('class', 'btn btn-default');
       $('#lampColor2').attr('class', 'btn btn-default');
 	$('#lampColor4').attr('class', 'btn btn-primary');
     }
     $.get( "/lampColor4" );
+    for(var j = 0; j < 5; j++) {
+        for(var i = 0; i < 5; i++) {
+          $("#left").trigger("click");
+        }
+        for(var i = 0; i < 5; i++) {
+          $("#right").trigger("click");
+        }
+      }
   });
 
 	function respondToVoiceCommand() {
