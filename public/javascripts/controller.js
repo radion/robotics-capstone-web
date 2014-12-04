@@ -264,28 +264,27 @@ audioElement.pause();
     $.get( "/lampColor3" );
   });
 
- $('#lampColor4').click(function() {
-var audio = new Audio();
-	audio.src ='/fiesta.mp3';
-	audio.play();
-  if(currentLightColor != 4) {
-	audioElement.play();
+  $('#lampColor4').click(function() {
+    // Fiesta enabled sound
+    var audio = new Audio();
+    audio.src ='/fiesta.mp3';
+    audio.play();
+    if(currentLightColor != 4) {
+      // Jingle Bells
+      audioElement.play();
       currentLightColor = 4;
-      
       $('#lampColor3').attr('class', 'btn btn-default');
       $('#lampColor1').attr('class', 'btn btn-default');
       $('#lampColor2').attr('class', 'btn btn-default');
-	$('#lampColor4').attr('class', 'btn btn-primary');
+      $('#lampColor4').attr('class', 'btn btn-primary');
+      for(var i = 0; i < 5; i++) {
+        $("#left").trigger("click");
+      }
+      for(var i = 0; i < 5; i++) {
+        $("#right").trigger("click");
+      }
     }
     $.get( "/lampColor4" );
-    for(var j = 0; j < 5; j++) {
-        for(var i = 0; i < 5; i++) {
-          $("#left").trigger("click");
-        }
-        for(var i = 0; i < 5; i++) {
-          $("#right").trigger("click");
-        }
-      }
   });
 
 	function respondToVoiceCommand() {
